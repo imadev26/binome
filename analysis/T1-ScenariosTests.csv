@@ -1,0 +1,5 @@
+﻿Scenario,Threads,Ramp-up,Duree,Description operations
+READ-heavy,50,30s,30min,"GET /customers (80%) + GET /orders (20%) - Lectures simples avec pagination"
+JOIN-filter,30,20s,16min,"GET /customers?hasOrders=true (70%) + GET /orders?status=SHIPPED (30%) - Requetes avec filtres et JOINs SQL"
+MIXED (2 entites),40,25s,20min,"GET (50%) + POST (20%) + PUT (20%) + DELETE (10%) sur customers et orders - Operations CRUD mixtes"
+HEAVY-body,35,20s,16min,"POST/PUT avec corps JSON 5-50KB (customers + liste orders) - Test charge reseau et parsing"

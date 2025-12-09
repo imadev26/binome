@@ -1,0 +1,37 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    monitor: 'benchmark-monitor'
+
+scrape_configs:
+  # Variant A - Jersey (port 8081 for JMX exporter)
+  - job_name: 'variant-a-jersey'
+    static_configs:
+      - targets: ['variant-a:8081']
+        labels:
+          variant: 'A'
+          stack: 'Jersey'
+
+  # Variant C - Spring MVC (actuator endpoint)
+  - job_name: 'variant-c-spring-mvc'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['variant-c:8082']
+        labels:
+          variant: 'C'
+          stack: 'Spring-MVC'
+
+  # Variant D - Spring Data REST (actuator endpoint)
+  - job_name: 'variant-d-spring-data'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['variant-d:8083']
+        labels:
+          variant: 'D'
+          stack: 'Spring-Data-REST'
+
+  # Prometheus self-monitoring
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']

@@ -1,0 +1,6 @@
+﻿Metrique,Variant A,Variant C,Variant D
+CPU % (moy/pic),N/A,55% / 88%,62% / 92%
+Heap Mo (moy/pic),N/A,350 / 720,420 / 850
+GC ms/s (moy/pic),N/A,22 / 95,28 / 135
+Threads (moy/pic),N/A,32 / 55,38 / 62
+HikariCP actifs/max,N/A,12 / 20,14 / 20

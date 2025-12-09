@@ -1,0 +1,10 @@
+Élément,Valeur
+Machine (CPU coeurs RAM),
+OS / Kernel,
+Java version,
+Docker/Compose versions,
+PostgreSQL version,
+JMeter version,
+Prometheus / Grafana / InfluxDB,
+JVM flags (Xms/Xmx/GC),
+HikariCP (min/max/timeout),

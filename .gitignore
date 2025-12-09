@@ -1,0 +1,15 @@
+﻿# Build
+**/target/
+*.class
+
+# Large test files
+*.jtl
+*.hprof
+jmeter/final-reports/
+
+# Temp
+temp_binome/
+
+# IDE
+.idea/
+*.iml

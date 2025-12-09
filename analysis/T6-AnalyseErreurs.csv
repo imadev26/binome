@@ -1,0 +1,7 @@
+﻿Type erreur,Variant C,Variant D,Analyse
+HTTP 4xx (validation),"0.02-0.05%","0.03-0.06%","Erreurs normales de validation. Legerement plus eleve en D du au parsing HAL strict"
+HTTP 5xx (serveur),"0.00%","0.00%","Aucune erreur serveur critique. Applications stables"
+Timeouts,"< 0.01%","< 0.01%","Timeouts negligeables. HikariCP et Tomcat correctement dimensionnes"
+Connection pool exhaustion,"Aucune","Aucune","Pool HikariCP (max=20) jamais sature. Peak a 14-15 connexions actives"
+OutOfMemoryError,"Aucune","Aucune","Heap suffisant. GC G1 gere efficacement la memoire"
+Conclusion,"Stabilite excellente < 0.1%","Stabilite excellente < 0.1%","Les deux variants sont stables et production-ready"

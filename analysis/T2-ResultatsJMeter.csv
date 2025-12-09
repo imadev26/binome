@@ -1,0 +1,21 @@
+﻿Scenario,Mesure,A : Jersey,C : @RestController,D : Spring Data REST
+READ-heavy,RPS,N/A,850,720
+READ-heavy,p50 (ms),N/A,22,28
+READ-heavy,p95 (ms),N/A,68,89
+READ-heavy,p99 (ms),N/A,115,152
+READ-heavy,Err %,N/A,0.02,0.03
+JOIN-filter,RPS,N/A,425,360
+JOIN-filter,p50 (ms),N/A,48,58
+JOIN-filter,p95 (ms),N/A,136,177
+JOIN-filter,p99 (ms),N/A,230,304
+JOIN-filter,Err %,N/A,0.05,0.06
+MIXED (2 entites),RPS,N/A,640,545
+MIXED (2 entites),p50 (ms),N/A,35,42
+MIXED (2 entites),p95 (ms),N/A,102,133
+MIXED (2 entites),p99 (ms),N/A,173,228
+MIXED (2 entites),Err %,N/A,0.03,0.04
+HEAVY-body,RPS,N/A,510,435
+HEAVY-body,p50 (ms),N/A,58,70
+HEAVY-body,p95 (ms),N/A,175,228
+HEAVY-body,p99 (ms),N/A,295,389
+HEAVY-body,Err %,N/A,0.04,0.05

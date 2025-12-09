@@ -1,0 +1,89 @@
+---
+# JMX Exporter configuration for Jersey (Variant A)
+# This exposes JVM metrics in Prometheus format
+
+# Lowercase metric names
+lowercaseOutputName: true
+lowercaseOutputLabelNames: true
+
+# Whitelist important JVM metrics
+whitelistObjectNames:
+  - "java.lang:type=Memory"
+  - "java.lang:type=GarbageCollector,*"
+  - "java.lang:type=Threading"
+  - "java.lang:type=Runtime"
+  - "java.lang:type=OperatingSystem"
+  - "java.lang:type=MemoryPool,*"
+  - "com.zaxxer.hikari:type=Pool,*"
+
+# Rules for metric transformation
+rules:
+  # JVM Memory
+  - pattern: 'java.lang<type=Memory><HeapMemoryUsage>(\w+)'
+    name: jvm_memory_heap_$1_bytes
+    type: GAUGE
+    
+  - pattern: 'java.lang<type=Memory><NonHeapMemoryUsage>(\w+)'
+    name: jvm_memory_nonheap_$1_bytes
+    type: GAUGE
+
+  # GC metrics
+  - pattern: 'java.lang<type=GarbageCollector, name=([^,]+)><>CollectionCount'
+    name: jvm_gc_collection_total
+    type: COUNTER
+    labels:
+      gc: $1
+
+  - pattern: 'java.lang<type=GarbageCollector, name=([^,]+)><>CollectionTime'
+    name: jvm_gc_collection_seconds_total
+    type: COUNTER
+    labels:
+      gc: $1
+    valueFactor: 0.001
+
+  # Thread metrics
+  - pattern: 'java.lang<type=Threading><>ThreadCount'
+    name: jvm_threads_current
+    type: GAUGE
+
+  - pattern: 'java.lang<type=Threading><>PeakThreadCount'
+    name: jvm_threads_peak
+    type: GAUGE
+
+  - pattern: 'java.lang<type=Threading><>DaemonThreadCount'
+    name: jvm_threads_daemon
+    type: GAUGE
+
+  # CPU metrics
+  - pattern: 'java.lang<type=OperatingSystem><>ProcessCpuLoad'
+    name: jvm_process_cpu_load
+    type: GAUGE
+
+  - pattern: 'java.lang<type=OperatingSystem><>SystemCpuLoad'
+    name: jvm_system_cpu_load
+    type: GAUGE
+
+  # HikariCP connection pool
+  - pattern: 'com.zaxxer.hikari<type=Pool, name=([^,]+)><>ActiveConnections'
+    name: hikaricp_active_connections
+    type: GAUGE
+    labels:
+      pool: $1
+
+  - pattern: 'com.zaxxer.hikari<type=Pool, name=([^,]+)><>IdleConnections'
+    name: hikaricp_idle_connections
+    type: GAUGE
+    labels:
+      pool: $1
+
+  - pattern: 'com.zaxxer.hikari<type=Pool, name=([^,]+)><>TotalConnections'
+    name: hikaricp_total_connections
+    type: GAUGE
+    labels:
+      pool: $1
+
+  - pattern: 'com.zaxxer.hikari<type=Pool, name=([^,]+)><>ThreadsAwaitingConnection'
+    name: hikaricp_pending_threads
+    type: GAUGE
+    labels:
+      pool: $1

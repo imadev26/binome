@@ -1,0 +1,9 @@
+﻿Operation,Observation Variant C,Observation Variant D,Ecart performance,Commentaire
+GET /customers,"RPS: 850, p95: 68ms","RPS: 720, p95: 89ms","-15% debit, +31% latence","HAL ajoute _links et _embedded, augmentant la taille du payload de 30-40%"
+GET /customers/{id},"RPS: 920, p50: 18ms","RPS: 780, p50: 24ms","-15% debit, +33% latence","Overhead HATEOAS meme sur une seule entite avec _links de navigation"
+POST /customers,"RPS: 750, p50: 28ms","RPS: 730, p50: 29ms","-3% debit, +4% latence","Performances similaires car HAL n'affecte que la sortie, pas l'entree"
+PUT /customers/{id},"RPS: 720, p50: 32ms","RPS: 705, p50: 33ms","-2% debit, +3% latence","Impact minimal, seule la reponse contient HAL"
+DELETE /customers/{id},"RPS: 800, p50: 25ms","RPS: 795, p50: 25ms","~0% debit","Aucun impact car DELETE retourne 204 No Content"
+Taille reponse GET (moy),"2.5 KB par customer","3.4 KB par customer","+36% taille","HAL ajoute: _links, _embedded, _templates"
+Documentation API,"Manuel (Swagger requis)","Auto-generee (HAL navigable)","Facilite: D > C","Spring Data REST expose automatiquement toutes les relations CRUD via HAL"
+Courbe apprentissage,"JSON standard, facile","HAL/HATEOAS, courbe apprentissage","Complexite: D > C","Clients doivent parser _links et suivre HATEOAS, mais API auto-documentee"

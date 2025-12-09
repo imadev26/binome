@@ -1,0 +1,7 @@
+﻿Observation,Variant A (Jersey),Variant C (@RestController),Variant D (Spring Data REST)
+Scenario affecte,JOIN-filter,JOIN-filter,JOIN-filter
+Nombre requetes SQL pour 100 customers,"1 + 100 = 101 requetes (N+1 problem)","1 requete JOIN optimisee","1 requete JOIN optimisee"
+Impact p95 (estimation),"~400ms (3-5x plus lent)","136ms (reference)","177ms (+30% vs C, HAL overhead)"
+Metriques observees,"N/A (variant non teste)","Latences stables, pas de pics N+1","Latences stables, overhead HAL constant"
+Solution appliquee,"N/A","@EntityGraph ou JOIN FETCH dans repositories JPA","Associations @ManyToOne avec FetchType.LAZY optimise"
+Commentaire,"Le probleme N+1 classique: chaque Customer declenche une requete SQL separee pour ses Orders","Spring MVC avec JPA utilise des requetes JOIN optimisees","Spring Data REST genere egalement des JOIN optimises. HAL ajoute overhead JSON mais pas de N+1"

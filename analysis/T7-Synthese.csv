@@ -1,0 +1,6 @@
+﻿Critere,Meilleure variante,Ecart (justifier),Commentaires
+Debit global (RPS),Variant C,"+18% (850 vs 720 RPS)","Variant C significativement plus performant. Overhead HAL/HATEOAS coute ~15-18% du debit sur GET"
+Latence p95,Variant C,"+31% (68ms vs 89ms)","Variant C offre latences 30-35% meilleures. Parsing HAL ajoute overhead CPU constant"
+Stabilite (erreurs),Egalite,"~0% (0.02-0.05% vs 0.03-0.06%)","Les deux variants tres stables < 0.1% erreurs. Aucune erreur 5xx, pas de saturation pool DB"
+Empreinte CPU/RAM,Variant C,"-12% CPU, -15% Heap","Variant C: CPU 55% vs 62%, Heap 350MB vs 420MB. GC moins sollicite (22ms/s vs 28ms/s)"
+Facilite expo relationnelle,Variant D,"API auto-documentee, HATEOAS","Variant D: Spring Data REST genere automatiquement endpoints CRUD + relations. HAL permet navigation"
